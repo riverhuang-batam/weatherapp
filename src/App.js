@@ -1,6 +1,7 @@
 import React from 'react';
 import Weather from './weather/index.js'
 import FormWeather from './weather/form-component.js'
+import {Container} from 'reactstrap'
 import 'weather-icons/css/weather-icons.css'
 import './App.css';
 
@@ -36,13 +37,14 @@ class App extends React.Component{
     e.preventDefault();
     const country = e.target.elements.country.value
     const city = e.target.elements.city.value
+
     if(city && country){
       const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`)
     const response = await api_call.json()
     console.log(response)
+
     this.setState({
-      city:response.name,
-      country:response.sys.country,
+      city:`${response.name}, ${response.sys.country}`,
       temp_celsius:this.calCelsius(response.main.temp),
       temp_min: this.calCelsius(response.main.temp_min),
       temp_max: this.calCelsius(response.main.temp_max),
@@ -86,11 +88,15 @@ class App extends React.Component{
   }
   render(){
     return (
-      <div>
+      <Container>
+      <div className="mt-4 text-center">
+        
         <FormWeather
         loadWeather={this.getWeather}
         error={this.state.error}
+        
         />
+        
         <Weather 
         city={this.state.city} 
         country={this.state.country} 
@@ -99,10 +105,9 @@ class App extends React.Component{
         temp_min={this.state.temp_min}
         temp_max={this.state.temp_max}
         description={this.state.description}
-        
         />
-
       </div>
+      </Container>
     );
   }
   

@@ -38,7 +38,7 @@ class App extends React.Component{
     const country = e.target.elements.country.value
     const city = e.target.elements.city.value
 
-    if(city && country){
+    if(city== city && country==country){
       const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`)
     const response = await api_call.json()
     console.log(response)
@@ -51,7 +51,8 @@ class App extends React.Component{
       description: response.weather[0].description
     })
     this.get_WeatherIcon(this.weatherIcon, response.weather[0].id)
-    }else{
+    }
+    else{
       this.setState({error:true})
     }
   }

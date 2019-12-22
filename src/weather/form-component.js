@@ -11,19 +11,27 @@ import {
 } from 'reactstrap'
 
 export default class Formcomponent extends Component {
-    error = () => {
+    error_no_input_data = () => {
         return (
             <UncontrolledAlert color="danger">
                 Please Enter City and Country
             </UncontrolledAlert>
         )
     }
+    error_no_data = () => {
+        return (
+            <UncontrolledAlert color="danger">
+                location not found
+            </UncontrolledAlert>
+        )
+    }
     render() {
         return (
             <div>
-                <div>{this.props.error ? this.error() : null}
-
-                </div>
+                {this.props.error_no_input_data ? this.error_no_input_data() : null}
+                {this.props.error_no_data ? this.error_no_data() : null}
+                
+                
                 <h1 style={{color:"white"}} className="mt-4 mb-4">Weather Check</h1>
                 <Form onSubmit={this.props.loadWeather} >
                     <Row form>

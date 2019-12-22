@@ -19,7 +19,8 @@ class App extends React.Component{
       temp_max: undefined,
       temp_min: undefined,
       description: "",
-      error: false
+      error_no_input_data: false,
+      error_wrong_data:false
     };
     
     this.weatherIcon={
@@ -37,11 +38,19 @@ class App extends React.Component{
     e.preventDefault();
     const country = e.target.elements.country.value
     const city = e.target.elements.city.value
-
-    if(city== city && country==country){
-      const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`)
+    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`)
     const response = await api_call.json()
     console.log(response)
+    if(city && country){
+    if (response.cod == 404){
+      this.setState({
+        temperatur:undefined,
+        city:undefined,
+        country:undefined,
+        description:undefined,
+        error_no_data:"please enter the right value"
+      })
+    }else{
 
     this.setState({
       city:`${response.name}, ${response.sys.country}`,
@@ -50,10 +59,14 @@ class App extends React.Component{
       temp_max: this.calCelsius(response.main.temp_max),
       description: response.weather[0].description
     })
+    
     this.get_WeatherIcon(this.weatherIcon, response.weather[0].id)
+  }
     }
     else{
-      this.setState({error:true})
+      this.setState({
+        error_no_input_data:true
+      })
     }
   }
   get_WeatherIcon(icons, rangeID){
@@ -94,8 +107,8 @@ class App extends React.Component{
         
         <FormWeather
         loadWeather={this.getWeather}
-        error={this.state.error}
-        
+        error_no_input_data={this.state.error_no_input_data}
+        error_no_data={this.state.error_no_data}
         />
         
         <Weather 

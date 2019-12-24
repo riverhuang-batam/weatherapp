@@ -38,7 +38,8 @@
 }
 body {
   background: linear-gradient(to bottom, #000066 0%, #ff99ff 100%) no-repeat;
-  
+  background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    height:100%
 }

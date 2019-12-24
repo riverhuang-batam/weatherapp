@@ -20,7 +20,7 @@ class App extends React.Component{
       temp_min: undefined,
       description: "",
       error_no_input_data: false,
-      error_wrong_data:false
+      error_no_data:false
     };
     
     this.weatherIcon={

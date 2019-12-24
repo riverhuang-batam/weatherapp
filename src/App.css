@@ -39,6 +39,6 @@
 body {
   background: linear-gradient(to bottom, #000066 0%, #ff99ff 100%);
   background-repeat: no-repeat;
-    background-attachment: fixed;
+    
     background-size: cover;
 }

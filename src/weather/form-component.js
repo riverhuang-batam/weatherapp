@@ -32,6 +32,7 @@ export default class Formcomponent extends Component {
                 {this.props.error_no_data ? this.error_no_data() : null}
                 
                 
+                
                 <h1 style={{color:"white"}} className="mt-4 mb-4">Weather Check</h1>
                 <Form onSubmit={this.props.loadWeather} >
                     <Row form>
